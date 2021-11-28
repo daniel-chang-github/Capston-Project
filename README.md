@@ -1,5 +1,5 @@
 # Capston-Project
-**Financial Dashboard
+**Financial Dashboard**
 
 **Mission**
 -To stay on top of the financial market and make better financial decisions. 
