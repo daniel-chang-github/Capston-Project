@@ -29,9 +29,13 @@ Running the scheduler.py will run the following python scripts.
 There are 4 main parts to this project.
 
     - Downloding the data.
+        - get_*.py files
     - Formatting the downloaded data and uploading the data to DB.
+        - data_load*.py files
     - Script that runs downloading and uploading the data.
+        - update-*.py files
     - Scheduler that runs doanloding and uploading at set times.
+        - scheduler.py
 
 ## Authors
 
