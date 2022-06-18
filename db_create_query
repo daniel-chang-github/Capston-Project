@@ -1,0 +1,143 @@
+CREATE TABLE "gov_official" (
+  "name" varchar,
+  PRIMARY KEY ("name")
+);
+
+CREATE TABLE "ticker_list" (
+  "ticker" varchar,
+  "name" varchar,
+  "sector" varchar,
+  PRIMARY KEY ("ticker")
+);
+
+CREATE TABLE "gov_official_trans" (
+  "name" varchar,
+  "disclosure_Date" date,
+  "transaction_Date" date,
+  "ticker" varchar,
+  "asset_Description" varchar,
+  "amount" varchar,
+  "link_To_Report" varchar,
+  "trans_Type" varchar,
+  PRIMARY KEY ("name", "disclosure_Date", "ticker"),
+  CONSTRAINT "FK_gov_official_trans.name"
+    FOREIGN KEY ("name")
+      REFERENCES "gov_official"("name"),
+  -- CONSTRAINT "FK_gov_official_trans.ticker"
+  --   FOREIGN KEY ("ticker")
+  --     REFERENCES "ticker_list"("ticker")
+);
+
+CREATE TABLE "yf_major_holders" (
+  "ticker" varchar,
+  "date" date,
+  "percentage" float,
+  "holder_type" varchar,
+  "import_file_name" varchar,
+  PRIMARY KEY ("ticker", "date", "holder_type"),
+  CONSTRAINT "FK_yf_major_holders.ticker"
+    FOREIGN KEY ("ticker")
+      REFERENCES "ticker_list"("ticker")
+);
+
+CREATE TABLE "stock_price" (
+  "ticker" varchar,
+  "date" date,
+  "volume" int,
+  "open" float,
+  "close" float,
+  "high" float,
+  "low" float,
+  "dividend" float,
+  "import_file_name" varchar,
+  PRIMARY KEY ("ticker", "date"),
+  CONSTRAINT "FK_stock_price.ticker"
+    FOREIGN KEY ("ticker")
+      REFERENCES "ticker_list"("ticker")
+);
+
+CREATE TABLE "twitter_users" (
+  "user_Id" varchar,
+  PRIMARY KEY ("user_Id")
+);
+
+CREATE TABLE "tweets" (
+  "user_id" varchar,
+  "ticker" varchar,
+  "create_At" date,
+  "full_text" varchar,
+  "symbols" varchar,
+  PRIMARY KEY ("user_id", "create_At"),
+  CONSTRAINT "FK_tweets.user_id"
+    FOREIGN KEY ("user_id")
+      REFERENCES "twitter_users"("user_Id"),
+  CONSTRAINT "FK_tweets.ticker"
+    FOREIGN KEY ("ticker")
+      REFERENCES "ticker_list"("ticker")
+);
+
+CREATE TABLE "recommendations" (
+  "ticker" varchar,
+  "firm_name" varchar,
+  "to_grade" varchar,
+  "from_grade" varchar,
+  "action" varchar,
+  "import_file_name" varchar,
+  "date" date,
+  PRIMARY KEY ("ticker", "firm_name", "date"),
+  CONSTRAINT "FK_recommendations.ticker"
+    FOREIGN KEY ("ticker")
+      REFERENCES "ticker_list"("ticker")
+);
+
+CREATE TABLE "cash_flow" (
+  "ticker" varchar,
+  "report_date" date,
+  "change_to_liabilities" int,
+  "total_cashflows_from_investing_cctivities" int,
+  "total_cash_from_financing_activities" int,
+  "change_to_operating_activities" int,
+  "issuance_of_stock" int,
+  "net_Iicome" int,
+  "change_in_cash" int,
+  "repurchase_of_stock" int,
+  "effect_of_exhcnage_rate" int,
+  "total_cash_from_operating_activities" int,
+  "depreciation" int,
+  "change_to_net_income" int,
+  "capital_expenditures" int,
+  "other_cashflows_from_investing_activities" int,
+  "net_borrowings" int,
+  "import_file_name" varchar,
+  PRIMARY KEY ("ticker", "report_date"),
+  CONSTRAINT "FK_cash_flow.ticker"
+    FOREIGN KEY ("ticker")
+      REFERENCES "ticker_list"("ticker")
+);
+
+CREATE TABLE "company_financials" (
+  "ticker" varchar,
+  "report_date" date,
+  "research_development" int,
+  "income_before_tax" int,
+  "net_income" int,
+  "selling_general_admin" int,
+  "gross_profit" int,
+  "ebit" int,
+  "operating_income" int,
+  "interest_expense" int,
+  "income_tax_expense" int,
+  "total_revenue" int,
+  "total_operating_expenses" int,
+  "cost_of_revenue" int,
+  "total_other_income_expense_net" int,
+  "net_income_from_continuing_ops" int,
+  "net_income_applicable_to_common_shares" int,
+  "import_file_name" varchar,
+  PRIMARY KEY ("ticker", "report_date"),
+  CONSTRAINT "FK_company_financials.ticker"
+    FOREIGN KEY ("ticker")
+      REFERENCES "ticker_list"("ticker")
+);
+
+
