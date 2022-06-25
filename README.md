@@ -13,7 +13,7 @@ The goal of this project is to stay on top of the financial market and make bett
 Please reference the requirement.txt
 
 ### Installing
-
+-
 
 ### Executing program
 
@@ -56,10 +56,3 @@ Daniel
 Inspiration, code snippets, etc.
 
 
-## Choices you had to make about any cleaning/transformation of the data you perform in your prototype
-
-
-
-## Choices you made about the automation of your data pipeline that impact its performance or reliability
-
-- 
